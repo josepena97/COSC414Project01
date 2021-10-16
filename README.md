@@ -14,7 +14,7 @@ The super bug zapper is a 2-D interactive game developed using JavaScript and We
 6. The game can randomly generate up to a fixed number (say 10) of different bacteria (each with a different color).
 7. The bacteria appear as a crust on the circumference of the disk.
 8. The game gains points through the delays in the user responding and by any specific bacteria reaching a threshold (for example,a 30-degree arc).
-9. The player wins if all bacteria are poisoned before any twodifferent bacteria reach the threshold mentioned above.
+9. The player wins if all bacteria are poisoned before any two different bacteria reach the threshold mentioned above.
 
 
 # Bonus Features implemented:
