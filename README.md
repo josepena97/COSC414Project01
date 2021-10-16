@@ -1,6 +1,8 @@
 # COSC414Project01
 Marieke Gutter-Spence (43435445)
 Jose Pena Revelo ()
+
+# 
 The super bug zapper is a 2-D interactive game developed using JavaScript and WebGL. The game implements a variety of different features.
 
 # Features:
