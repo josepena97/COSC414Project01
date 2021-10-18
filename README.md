@@ -21,3 +21,7 @@ The super bug zapper is a 2-D interactive game developed using JavaScript and We
 
 1. When a bacterial culture is hit, use a simple 2D particle system to simulate an explosion at the point where the poison is administered.
 2. The effect of the poison administered also propagates outward from the point of insertion of the position until all the bacteria are destroyed.
+
+
+# How to play:
+Players can play the game online through their computers local host
