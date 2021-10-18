@@ -7,14 +7,30 @@
 
 <script id="vertex-shader" type="x-shader/x-vertex">
 attribute vec3 vPosition;
-attribute vec3 vColor;
+attribute vec4 vColor;
 varying vec4 color;
+
 
 void
 main()
 {
     gl_Position = vec4(vPosition, 1.0);
-    color = vec4(vColor, 1.0);
+    color = vColor;
+}
+</script>
+<script id="vertex-shader2" type="x-shader/x-vertex">
+attribute vec3 vA;
+attribute vec3 vB;
+attribute vec3 center;
+attribute vec4 vColor;
+varying vec4 color;
+
+
+void
+main()
+{
+    gl_Position = vec4(vPosition, 1.0);
+    color = vColor;
 }
 </script>
 
@@ -35,8 +51,8 @@ main()
 <script type="text/javascript" src="circle.js"></script>
 </head>
 <body id="bodyStyle">
-<!-- <h1 id="debug">
-</h1> -->
+<h1 id="debug">
+</h1>
 <canvas id="gl-canvas">
 Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>

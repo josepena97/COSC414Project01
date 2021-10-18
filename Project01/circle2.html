@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<title>Circle</title>
+
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+  #define PI radians(180.0)
+
+  attribute float vertex;
+  attribute vec2 centerPoint;
+  uniform float verticesNumber;
+  uniform float radiusLength;
+  uniform float circleVertices;
+  uniform float increment;
+
+  attribute vec4 vColor;
+  varying vec4 color;
+
+  void main() {
+    float circleIteration = mod(vertex, verticesNumber);
+    float triangle = floor(circleIteration / 3.0);
+    float triVertex = mod(circleIteration, 3.0);
+    float edge = triVertex + triangle;
+    float angleRatio = edge / circleVertices;
+    float triangleAngle = angleRatio * PI * 2.0;
+    float radiusRatio = radiusLength;
+    if(centerPoint != vec2(0.0, 0.0)){
+      radiusRatio = increment;
+    }
+    float radius = step(triVertex, 1.5) * radiusRatio;
+    float x = (cos(triangleAngle) * radius) + centerPoint[0];
+    float y = (sin(triangleAngle) * radius) +  centerPoint[1];
+    vec2 pos = vec2(x, y);
+
+    gl_Position = vec4(pos, 0, 1);
+    color = vColor;
+  }
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+precision mediump float;
+varying vec4 color;
+
+void
+main()
+{
+    gl_FragColor = color;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="circle2.js"></script>
+</head>
+<body id="bodyStyle">
+<h1 id="debug">
+</h1>
+<canvas id="gl-canvas">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>
