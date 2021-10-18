@@ -134,3 +134,7 @@ function checkThreshold(){
 
   }
 }
+/*ONCLICK WE WILL NEED TO CALCULATE THE DISTANCES
+BETWEEN THE CLICK AND THE CENTER OF bacterias
+THAT ARE THE SAME BETWEEN triangleVertices
+*/
