@@ -3,7 +3,7 @@ var canvas;
 var gl;
 
 var radius = 0.8;
-var circleVertices = 40;
+var circleVertices = 100;
 var triangleVertices = circleVertices * 3;
 var bacteriaNumber = Math.floor(Math.random() * 8) + 2;
 var vertices = new Float32Array(triangleVertices * (bacteriaNumber+1));
@@ -11,10 +11,12 @@ var colors = [];
 var centerPoint = [];
 var radiusIncrement;
 var increment = 0.01;
-var threshold = 2*radius * Math.sin((Math.PI/6)/2)
+var threshold = 2*radius * Math.sin((Math.PI/6)/2);
+var centerPointB = [];
+var distancesB = [];
+var minDistance = [];
 window.onload = window.onresize = function starter(){
   init();
-  // initBacteria();
 }
 function init()
 {
@@ -45,7 +47,9 @@ function init()
       // alert(angleRatio);
       var triangleAngle = angleRatio * Math.PI * 2.0;
       // alert(triangleAngle);
-      var bacteriaCenter = vec2(Math.cos(triangleAngle) * radius, Math.sin(triangleAngle) * radius) ;
+      var bacteriaCenter = vec2(Math.cos(triangleAngle) * radius, Math.sin(triangleAngle) * radius);
+      centerPointB[i] = bacteriaCenter;
+
       // alert("Center bac: " + bacteriaCenter);
       var rand = [Math.random(), Math.random(), Math.random()];
       for(var j = triangleVertices * (i + 1); j< ((i + 2) * triangleVertices); j++){
@@ -54,6 +58,8 @@ function init()
         colors[j] = vec4(rand[0], rand[1], rand[2], 1.0);
       }
     }
+
+    centerDistances();
     //
     //  Configure WebGL
     //
@@ -117,6 +123,41 @@ function init()
     render();
 };
 
+function centerDistances()
+{
+  var singleDistance;
+  min = Number.POSITIVE_INFINITY;
+  for(var i = 0; i < bacteriaNumber - 1; i++){
+    singleDistance = [];
+    // document.getElementById('debug').innerHTML = document.getElementById('debug').innerHTML + "<p> Bacteria" + i +"</p>";
+    for(var j = i + 1; j < bacteriaNumber; j++){
+      // document.getElementById('debug').innerHTML = document.getElementById('debug').innerHTML + "<br> -Bacteria" + i +" - " + j;
+      d = distanceBetweenPoints(centerPointB[i], centerPointB[j]);
+      if(min>d){
+        // alert("BOOLEAN <br>" + min + " > " + d + "  =  " + (min>d));
+        min = d;
+        minDistance = [d, i, j];
+      }
+      singleDistance.push(d);
+    }
+    distancesB.push(singleDistance);
+  }
+
+  // document.getElementById('debug').innerHTML = "<pre>" + printArr(distancesB) + "</pre><br>" + minDistance ;
+
+}
+function printArr(arr) {
+  let str = "";
+    for (let item of arr) {
+      if (Array.isArray(item)) str += printArr(item);
+      else str += item + ", ";
+    }
+    return str;
+}
+
+function distanceBetweenPoints(v1, v2) {
+    return Math.abs(Math.sqrt((v1[0] - v2[0]) * (v1[0] - v2[0]) + (v1[1] - v2[1]) * (v1[1] - v2[1])));
+}
 function render()
 {
     gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);

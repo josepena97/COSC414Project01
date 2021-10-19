@@ -202,11 +202,11 @@ function divideBacteria(low, angle, i, r, xc, yc, randc){
   divideBacteria(high, angle, i, r, xc, yc, randc);
 };
 
-// var timer = setInterval( increaseRadius, 10);
-// function increaseRadius(){
-//   radiusB += 0.0005;
-//   updateBacteria();
-// };
+var timer = setInterval( increaseRadius, 10);
+function increaseRadius(){
+  radiusB += 0.0005;
+  updateBacteria();
+};
 
 function updateBacteria(){
   for(var i = 0; i < randomBacterias; i++){
