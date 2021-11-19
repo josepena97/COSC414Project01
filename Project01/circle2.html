@@ -1,3 +1,9 @@
+<!--
+Group 42
+Group members:
+Jose Pena Revelo 89152599
+Marieke Gutter-Spence (43435445)
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +15,8 @@
   #define PI radians(180.0)
 
   attribute float vertex;
-  attribute vec2 centerPoint;
+  attribute vec3 centerPoint;
+
   uniform float verticesNumber;
   uniform float radiusLength;
   uniform float circleVertices;
@@ -26,9 +33,13 @@
     float angleRatio = edge / circleVertices;
     float triangleAngle = angleRatio * PI * 2.0;
     float radiusRatio = radiusLength;
-    if(centerPoint != vec2(0.0, 0.0)){
+    if(centerPoint != vec3(0.0, 0.0, 0.0)){
       radiusRatio = increment;
+      if(centerPoint[2] != 0.0){
+        radiusRatio -= centerPoint[2];
+      }
     }
+
     float radius = step(triVertex, 1.5) * radiusRatio;
     float x = (cos(triangleAngle) * radius) + centerPoint[0];
     float y = (sin(triangleAngle) * radius) +  centerPoint[1];
@@ -59,7 +70,9 @@ main()
 <div id="debug">
 </div>
 <canvas id="gl-canvas">
-Oops ... your browser doesn't support the HTML5 canvas element
 </canvas>
+<div id="resetB">
+<input type="reset" onclick="location.reload()">
+</div>
 </body>
 </html>
